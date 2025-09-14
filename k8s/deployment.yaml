@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: flask-microservices
-        image: aksclusteracrdemo.azurecr.io/app:3d9a520
+        image: aksclusteracrdemo.azurecr.io/app:283eff0
         imagePullPolicy: IfNotPresent  
         ports:
         - containerPort: 5000
