@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-microservices
+  namespace: microservices
+  labels:
+    app: flask-microservices
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-microservices
+  template:
+    metadata:
+      labels:
+        app: flask-microservices
+        version: v1
+    spec:
+      containers:
+      - name: flask-microservices
+        image: aksclusteracrdemo.azurecr.io/app:ec1df49
+        imagePullPolicy: IfNotPresent  
+        ports:
+        - containerPort: 5000
+          name: http
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: FLASK_APP
+          value: "run.py"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /users
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /users
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+      restartPolicy: Always
