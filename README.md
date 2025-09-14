@@ -40,11 +40,11 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 kubectl port-forward service/argocd-server -n argocd 8080:443 
 ```
 ## 📸 Demo Screenshots
-### Application Running
-![ArgoCD Dashboard](img/1.png)
 ### ArgoCD GitOps Dashboard
+![ArgoCD Dashboard](img/1.png)
+### Users
 ![Users](img/2.png)
-### Monitoring Stack (Prometheus/Grafana)                                                          
+### Products                                       
 ![Products](img/3.png)
 
 
