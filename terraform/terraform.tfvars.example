@@ -1,0 +1,24 @@
+location = "East US"
+
+tags = {
+  Environment = "dev"
+  Project     = "aks-cluster"
+  ManagedBy   = "terraform"
+  Owner       = "your-team"
+  CostCenter  = "your-cost-center"
+}
+
+
+cluster_name       = "aks-cluster"
+dns_prefix         = "aks"
+kubernetes_version = null # null = latest recommended version, or specify like "1.28.3"
+
+
+node_count            = 2
+vm_size               = "Standard_D2s_v3"
+auto_scaling_enabled  = true
+min_count             = 1
+max_count             = 5
+availability_zones    = ["1", "2", "3"] # Use multiple zones for HA
+os_disk_size_gb       = 30
+

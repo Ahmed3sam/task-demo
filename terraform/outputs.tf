@@ -123,11 +123,11 @@ output "kubectl_config_command" {
 output "cluster_info" {
   description = "Summary of cluster information"
   value = {
-    cluster_name      = azurerm_kubernetes_cluster.aks.name
-    resource_group    = azurerm_resource_group.aks.name
-    location          = azurerm_resource_group.aks.location
+    cluster_name       = azurerm_kubernetes_cluster.aks.name
+    resource_group     = azurerm_resource_group.aks.name
+    location           = azurerm_resource_group.aks.location
     kubernetes_version = azurerm_kubernetes_cluster.aks.kubernetes_version
-    node_count        = azurerm_kubernetes_cluster.aks.default_node_pool[0].node_count
-    vm_size           = azurerm_kubernetes_cluster.aks.default_node_pool[0].vm_size
+    node_count         = azurerm_kubernetes_cluster.aks.default_node_pool[0].node_count
+    vm_size            = azurerm_kubernetes_cluster.aks.default_node_pool[0].vm_size
   }
 }

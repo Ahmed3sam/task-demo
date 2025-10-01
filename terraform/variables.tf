@@ -94,7 +94,7 @@ variable "network_plugin" {
   description = "Network plugin to use for networking (azure or kubenet)"
   type        = string
   default     = "azure"
-  
+
   validation {
     condition     = contains(["azure", "kubenet"], var.network_plugin)
     error_message = "Network plugin must be either 'azure' or 'kubenet'."
@@ -105,7 +105,7 @@ variable "network_policy" {
   description = "Network policy to use for networking (azure, calico, or cilium)"
   type        = string
   default     = "azure"
-  
+
   validation {
     condition     = contains(["azure", "calico", "cilium"], var.network_policy)
     error_message = "Network policy must be 'azure', 'calico', or 'cilium'."
@@ -134,7 +134,7 @@ variable "outbound_type" {
   description = "The outbound (egress) routing method"
   type        = string
   default     = "loadBalancer"
-  
+
   validation {
     condition     = contains(["loadBalancer", "userDefinedRouting", "managedNATGateway", "userAssignedNATGateway"], var.outbound_type)
     error_message = "Outbound type must be one of: loadBalancer, userDefinedRouting, managedNATGateway, userAssignedNATGateway."

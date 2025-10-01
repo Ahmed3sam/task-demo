@@ -28,27 +28,27 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   # Default node pool
   default_node_pool {
-    name            = "default"
-    node_count      = var.auto_scaling_enabled ? null : var.node_count
-    vm_size         = var.vm_size
-    type            = "VirtualMachineScaleSets"
+    name                = "default"
+    node_count          = var.auto_scaling_enabled ? null : var.node_count
+    vm_size             = var.vm_size
+    type                = "VirtualMachineScaleSets"
     enable_auto_scaling = var.auto_scaling_enabled
-    min_count       = var.auto_scaling_enabled ? var.min_count : null
-    max_count       = var.auto_scaling_enabled ? var.max_count : null
-    
+    min_count           = var.auto_scaling_enabled ? var.min_count : null
+    max_count           = var.auto_scaling_enabled ? var.max_count : null
+
     # Enable zones for high availability
     zones = var.availability_zones
-    
+
     # OS and storage settings
     os_disk_size_gb = var.os_disk_size_gb
     os_disk_type    = "Managed"
-    
+
     # Network settings
     vnet_subnet_id = var.subnet_id
-    
+
     # Node labels and taints
     node_labels = var.node_labels
-    
+
     tags = var.tags
   }
 
@@ -59,12 +59,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   # Network profile
   network_profile {
-    network_plugin    = var.network_plugin
-    network_policy    = var.network_policy
-    dns_service_ip    = var.dns_service_ip
-    service_cidr      = var.service_cidr
-    pod_cidr          = var.network_plugin == "kubenet" ? var.pod_cidr : null
-    outbound_type     = var.outbound_type
+    network_plugin = var.network_plugin
+    network_policy = var.network_policy
+    dns_service_ip = var.dns_service_ip
+    service_cidr   = var.service_cidr
+    pod_cidr       = var.network_plugin == "kubenet" ? var.pod_cidr : null
+    outbound_type  = var.outbound_type
   }
 
   # RBAC and Azure AD integration
@@ -77,7 +77,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   # Security and monitoring
   role_based_access_control_enabled = true
   local_account_disabled            = var.local_account_disabled
-  
+
   # Enable monitoring
   oms_agent {
     log_analytics_workspace_id = azurerm_log_analytics_workspace.aks.id
@@ -137,14 +137,14 @@ resource "azurerm_kubernetes_cluster_node_pool" "workload" {
   enable_auto_scaling   = var.workload_auto_scaling_enabled
   min_count             = var.workload_auto_scaling_enabled ? var.workload_min_count : null
   max_count             = var.workload_auto_scaling_enabled ? var.workload_max_count : null
-  
+
   zones = var.availability_zones
-  
+
   os_disk_size_gb = var.workload_os_disk_size_gb
   os_disk_type    = "Managed"
-  
+
   vnet_subnet_id = var.subnet_id
-  
+
   node_labels = var.workload_node_labels
   node_taints = var.workload_node_taints
 
@@ -161,7 +161,7 @@ resource "azurerm_container_registry" "main" {
 
   # Security settings for private cluster
   public_network_access_enabled = var.acr_public_network_access_enabled
-  
+
   # Enable zone redundancy for Premium SKU
   zone_redundancy_enabled = var.acr_sku == "Premium" ? var.acr_zone_redundancy_enabled : false
 
